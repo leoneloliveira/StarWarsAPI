@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Wars API</title>
+</head>
+<body>
+    <h1>Star Wars API</h1>
+    
+    <h2>Obter informações de um personagem</h2>
+    
+  <label for="personagem">Digite o id:</label>
+  <input type="text" id="personagem" name="personagemId" required>
+  <button onclick="consultarPersonagem()">Consultar</button>
+  <div id="resultado"></div>
+
+
+  <h2>Obter informações de um planeta</h2>
+   
+        <label for="planetaId">ID do Planeta:</label>
+        <input type="text" id="planetaId" name="planetaId">
+        <button onclick="consultarPlaneta()">Consultar</button>   
+        <div id="planetaInfo"></div>    
+    
+
+    <script>
+      
+    async function consultarPersonagem() {
+      const personagemId = document.getElementById('personagem').value;
+      const response = await fetch(`http://localhost:8080/personagem/${personagemId}`);
+      const data = await response.json();
+      const resultado = document.getElementById('resultado');
+      resultado.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+    }
+
+    async function consultarPlaneta() {
+      const planetaId = document.getElementById('planetaId').value;
+      const response = await fetch(`http://localhost:8080/planeta/${planetaId}`);
+      const data = await response.json();
+      const resultado = document.getElementById('planetaInfo');
+      resultado.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+    }
+  
+     
+    </script>
+</body>
+</html>
